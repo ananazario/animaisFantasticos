@@ -1,3 +1,6 @@
-@import './geral.css';
-@import './modal.css';
-@import './tooltip.css'
+@import './modules/geral.css';
+@import './modules/modal.css';
+@import './modules/tooltip.css';
+@import './modules/dropdown-menu.css';
+@import './modules/menu-mobile.css';
+@import './modules/numeros.css';
