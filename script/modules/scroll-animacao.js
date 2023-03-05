@@ -6,7 +6,7 @@ export default class AnimaScroll {
         this.sections = document.querySelectorAll(sections);
         this.windowTamanho = window.innerHeight * 0.5;
 
-        this.checkDistance = debounce(this.checkDistance.bind(this), 100);
+        this.checkDistance = debounce(this.checkDistance.bind(this), 80);
     }
 
     // Pega a distancia de cada item com relação ao topo do site

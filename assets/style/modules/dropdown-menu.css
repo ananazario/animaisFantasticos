@@ -45,3 +45,10 @@
 .dropdown-menu li a:hover {
     color: white;
 }
+
+@media screen and (max-width: 500px) {
+    [data-dropdown] .dropdown-menu {
+        display: block;
+        animation: show-up .3s forwards;
+    }
+}

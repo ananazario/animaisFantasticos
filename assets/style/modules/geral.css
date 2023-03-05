@@ -215,7 +215,7 @@ body {
     }
 
     .grid-section h1 {
-        font-size: 3rem;
+        font-size: 2.5em;
     }
 
     .menu {
@@ -276,12 +276,19 @@ body {
 }
 
 .js [data-anime="accordion"] dt::after {
-    content: '⮧';
+    content: '';
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    background: url('../../img/arrow-red.svg') no-repeat center center;
+    transform: rotate(90deg);
     margin-left: 10px;
 }
 
 .js [data-anime="accordion"] dt.ativo::after {
-    content: '⮥';
+    content: '';
+    transform: rotate(-90deg);
+    transition: transform .3s;
 }
 
 .js [data-anime="accordion"] dd.ativo {
@@ -329,4 +336,11 @@ body {
     padding: .2rem .5rem;   
     font-weight: 700;
     border-radius: 2px;
+}
+
+.arrow-black {
+    background: url('../../img/arrow-black.svg') no-repeat center center;
+    display: inline-block;
+    width: 8px;
+    height: 10px;
 }
