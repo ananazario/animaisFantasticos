@@ -1,23 +1,46 @@
-export default function animaScroll() {
-    const sections = document.querySelectorAll('[data-anime="scroll"]');
+import debounce from "./debounce.js";
 
-    const windowTamanho = window.innerHeight * 0.5;
+export default class AnimaScroll {
 
-    function scroll() {
-        sections.forEach((section) => {
-            const sectionTop = section.getBoundingClientRect().top;
-            const isSectionVisible = (sectionTop - windowTamanho) < 0;
+    constructor(sections) {
+        this.sections = document.querySelectorAll(sections);
+        this.windowTamanho = window.innerHeight * 0.5;
 
-            if (isSectionVisible) 
-                section.classList.add('ativo')
-            else if (section.classList.contains('ativo')) 
-                section.classList.remove('ativo')
-            
+        this.checkDistance = debounce(this.checkDistance.bind(this), 100);
+    }
+
+    // Pega a distancia de cada item com relação ao topo do site
+    getDistance() {
+        this.distance = [...this.sections].map(section => {
+            const offset = section.offsetTop;
+            return {
+                element: section,
+                offset: Math.floor(offset - this.windowTamanho),
+            }
         })
     }
 
-    if (sections.length) {
-        scroll();
-        window.addEventListener('scroll', scroll)
+    // Verifica a distância em cada objeto em relação ao scroll do site
+    checkDistance() {
+        this.distance.forEach((item) => {
+            if (window.pageYOffset > item.offset) 
+                item.element.classList.add('ativo')
+            else if (item.element.classList.contains('ativo')) 
+                item.element.classList.remove('ativo') 
+        })
     }
+
+    init() {
+        if (this.sections.length) {
+            this.getDistance();
+            this.checkDistance();
+            window.addEventListener('scroll', this.checkDistance);
+        }
+        return this;
+    }
+
+    stop() {
+        window.removeEventListener('scroll', this.checkDistance)
+    }
+
 }
